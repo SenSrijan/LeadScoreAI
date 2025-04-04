@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Score AI | Analyze Sales Leads</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+    <meta name="description" content="AI-powered lead scoring tool to analyze and score your sales leads.">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lead Score AI</h1>
+            <p>Advanced AI analysis for your sales leads</p>
+        </header>
+
+        <div class="card input-section">
+            <form id="leadForm">
+                <div class="form-group">
+                    <label for="leadMessage">Enter lead message:</label>
+                    <textarea id="leadMessage" placeholder="Paste your lead message here..." required></textarea>
+                </div>
+                <button type="submit" id="analyzeBtn">
+                    <span class="spinner">⟳</span>
+                    Analyze Lead
+                </button>
+            </form>
+        </div>
+
+        <div class="card result-section" id="resultSection">
+            <div class="score-card">
+                <div class="score-item">
+                    <div class="score-value" id="sentimentScore">-</div>
+                    <div class="score-label">Sentiment Analysis</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="aiScore">-</div>
+                    <div class="score-label">AI Analysis</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="compositeScore">-</div>
+                    <div class="score-label">Final Score</div>
+                </div>
+            </div>
+
+            <div class="justification">
+                <h3>AI Justification</h3>
+                <p id="justification">-</p>
+            </div>
+
+            <div class="json-output">
+                <h3>Raw JSON Response</h3>
+                <pre id="jsonOutput">-</pre>
+            </div>
+        </div>
+
+        <div class="card example-section">
+            <h3>Try these examples:</h3>
+            <div class="examples">
+                <div class="example-card" data-example="Hi, I saw your ad and I'm very interested in your product. Could you please send more details?">
+                    <p>Interested customer requesting details</p>
+                </div>
+                <div class="example-card" data-example="We need a solution for our inventory management. Can you provide pricing information?">
+                    <p>Business needs inventory solution</p>
+                </div>
+                <div class="example-card" data-example="Not interested at this time, please remove me from your list.">
+                    <p>Uninterested prospect</p>
+                </div>
+                <div class="example-card" data-example="I'm the CTO of a mid-sized company and we're looking for an enterprise solution. Can we schedule a demo?">
+                    <p>Decision maker requesting demo</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Lead Score AI | Powered by AI analysis</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
