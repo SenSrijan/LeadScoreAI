@@ -1,7 +1,7 @@
 from ChatOpenRouter import OpenRouterLLM
 
 import os
-import nltk
+# import nltk
 import time
 import json
 from nltk.sentiment import SentimentIntensityAnalyzer
@@ -10,8 +10,8 @@ from pydantic import BaseModel, ValidationError
 
 load_dotenv()
 
-# One-time download for VADER
-nltk.download("vader_lexicon")
+# # One-time download for VADER
+# nltk.download("vader_lexicon")
 
 # Set OpenRouter key
 api_key = os.getenv("OPENROUTER_API_KEY")
