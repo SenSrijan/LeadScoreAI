@@ -2,9 +2,21 @@ from flask import Flask, request, jsonify, render_template
 import os
 from dotenv import load_dotenv
 from lead_analyzer import get_composite_lead_score
+# from waitress import serve
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
+
+import nltk
+import os
+
+nltk.data.path.append(os.getenv("NLTK_DATA", "nltk_data"))
+nltk.download('vader_lexicon')
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -28,6 +40,7 @@ def analyze_lead():
     Returns:
     JSON response with lead analysis results
     """
+    
     # Check if request has JSON data
     if not request.is_json:
         return jsonify({
@@ -36,6 +49,7 @@ def analyze_lead():
     
     # Get the message from the request
     data = request.get_json()
+    app.logger.info(f"Received data: {data}")
     
     # Validate that message is provided
     if 'message' not in data or not data['message']:
@@ -55,6 +69,7 @@ def analyze_lead():
     
     except Exception as e:
         # Handle any errors
+        app.logger.error(f"Error processing lead message: {str(e)}")
         return jsonify({
             "error": f"An error occurred: {str(e)}"
         }), 500
@@ -68,8 +83,9 @@ def health_check():
     })
 
 # if __name__ == '__main__':
-#     # Get port from environment variable or use default
-#     port = int(os.environ.get('PORT', 5000))
+# #     # Get port from environment variable or use default
+# #     port = int(os.environ.get('PORT', 5000))
     
 #     # Run the app
-#     app.run(host='0.0.0.0', port=port, debug=False) 
+#     # app.run(host='0.0.0.0', port=port, debug=False) 
+#     serve(app, host="0.0.0.0", port=8000)
